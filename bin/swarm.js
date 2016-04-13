@@ -6,7 +6,7 @@ const log4js = require('log4js');
 const dvalue = require('dvalue');
 const packageInfo = require('../package.json');
 
-const TrackerServer = { host: 'isuncloud.me', port: 80 };
+const TrackerServer = { host: 'swarm.tw', port: 80 };
 var randomName = function () {
   var text = "";
   var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
