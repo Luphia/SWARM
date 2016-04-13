@@ -22,7 +22,9 @@
     "udp2p": "^0.2.17"
   },
   "description": "Peer to Peer network",
-  "devDependencies": {},
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.5"
+  },
   "scripts": {
     "test": "bin/test.js"
   },

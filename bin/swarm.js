@@ -16,14 +16,15 @@ var randomName = function () {
 var registname, subdomain;
 
 var gui = true;
+var electron, app, Menu, Tray, BrowserWindow, ipcMain,dialog;
 try {
-  const electron = require('electron');
-  const app = electron.app;
-  const Menu = electron.Menu;
-  const Tray = electron.Tray;
-  const BrowserWindow = electron.BrowserWindow;
-  const ipcMain = electron.ipcMain;
-  const dialog = electron.dialog;
+  electron = require('electron');
+  app = electron.app;
+  Menu = electron.Menu;
+  Tray = electron.Tray;
+  BrowserWindow = electron.BrowserWindow;
+  ipcMain = electron.ipcMain;
+  dialog = electron.dialog;
 } catch (e) {
   gui = false;
 }
@@ -136,7 +137,7 @@ assignDomain = function (name) {
   var executor = getBot('Register');
   var fullname = [name, TrackerServer.host].join(".");
   executor.assignDomain(name, TrackerServer, function (e, d) {
-    if(e) { loggin.exception.info(e); }
+    if(e) { logger.exception.info(e); }
     if(d && d.result) { logger.info.info('Access URL:', fullname); }
   });
 };
@@ -258,7 +259,7 @@ close = function () {
   app.quit();
 };
 
-if(app) {
+if(gui) {
   app.on('ready', function () {
     initialFolder();
     initialLogger();

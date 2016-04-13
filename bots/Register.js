@@ -88,15 +88,20 @@ Bot.prototype.upnpPortMapping = function (cb) {
 	var client = natUpnp.createClient();
 	var network = {host: '0.0.0.0', port: 0};
 	var externalPort = randomPort();
-	client.portMapping({public: externalPort, private: this.network.internal, ttl: 10}, function(err) {
-		if(err) { setTimeout(function () { self.upnpPortMapping(cb); }, 3000); }
-		else {
-			client.externalIp(function(err, ip) {
-				network.host = ip;
-				network.port = externalPort;
-				self.network.external = network;
+	client.externalIp(function(e, ip) {
+		if(e) { return cb(err); }
+		network.host = ip;
+		network.port = externalPort;
+		self.network.external = network;
+		if(network.host != self.network.internal.host) {
+			client.portMapping({public: externalPort, private: self.network.internal, ttl: 10}, function(err) {
+				if(err) { return setTimeout(function () { self.upnpPortMapping(cb); }, 3000); }
 				cb(null, self.network);
 			});
+		}
+		else {
+			network.port = self.network.internal.port;
+			cb(null, self.network);
 		}
 	});
 };
