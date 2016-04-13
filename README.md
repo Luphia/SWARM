@@ -1,2 +1,2 @@
 # SWARM
-Peer to Peer social network
+Peer to Peer network
