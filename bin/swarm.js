@@ -118,6 +118,7 @@ loadConfig = function () {
 
   config = {
     UUID: UUID,
+    server: TrackerServer,
     path: folders,
     logger: logger,
     package: {

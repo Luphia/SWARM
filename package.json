@@ -17,7 +17,7 @@
     "nat-upnp": "^1.0.0",
     "raid2x": "^0.1.23",
     "serve-favicon": "^2.3.0",
-    "textype": "^1.0.3",
+    "textype": "^1.0.4",
     "tingodb": "^0.4.2",
     "udp2p": "^0.2.17"
   },

@@ -123,7 +123,7 @@ returnData = function(req, res, next) {
 	else {
 		res.send(result);
 	}
-
+	if(req.url == '/client/' && result.attr.result) return;
 	logger.info.info(req.method, req.url, result.attr.result, req.session.ip);
 };
 
@@ -165,10 +165,9 @@ Bot.prototype.init = function(config) {
 		config.listening = self.listening;
 		logger.info.info('Listening on port:', self.listening);
 		var bot = self.getBot('Register');
-		bot.getIP(function() { bot.upnpPortMapping(function (e, d) {
-			var url = 'http://' + d.external.host + ':' + d.external.port;
-			logger.info.info('Access Address:', url);
-		}); });
+		bot.findTunnel(function(e, d) {
+			if(e) { return logger.info.info('Tunnel not found'); }
+		});
 	});
 
 	// if has pxf -> create https service
