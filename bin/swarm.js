@@ -107,7 +107,7 @@ checkOpen = function () {
 // load config
 loadConfig = function () {
   // create UUID file if not exist
-  var UUID = dvalue.guid();
+  UUID = dvalue.guid();
   var pathUUID = path.join(homepath, 'UUID');
   if(!fs.existsSync(pathUUID)) {
     fs.writeFile(pathUUID, UUID, function(err) {});
